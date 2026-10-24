@@ -4,3 +4,8 @@ INFO:     Application startup complete.
 INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 INFO:     127.0.0.1:61754 - "POST /export HTTP/1.1" 200 OK
 INFO:     127.0.0.1:57724 - "POST /export HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51650 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51652 - "GET /skills HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51654 - "POST /chat HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:59986 - "POST /verify HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:61967 - "GET /stats HTTP/1.1" 200 OK

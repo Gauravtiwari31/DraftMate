@@ -17,7 +17,7 @@ def check_groq(model):
     t0 = time.time()
     r = client.chat.completions.create(
         model=model,
-        max_tokens=50,
+        max_tokens=500,
         messages=[{"role": "user", "content": "Reply with the single word: ok"}],
     )
     dt = time.time() - t0
@@ -43,16 +43,16 @@ def check_gemini(model):
 
 
 def main():
-    tiers = [("quick", QUICK, "groq"), ("balanced", BALANCED, "groq"), ("advanced", ADVANCED, "gemini")]
-    for tier, model, provider in tiers:
+    tiers = [("quick", QUICK), ("balanced", BALANCED), ("advanced", ADVANCED)]
+    for tier, model in tiers:
         try:
-            if provider == "groq":
-                ok, dt, detail = check_groq(model)
-            else:
+            if "gemini" in model:
                 ok, dt, detail = check_gemini(model)
-            print(f"tier={tier} provider={provider} model={model} ok={ok} latency={dt:.2f}s detail={detail!r}")
+            else:
+                ok, dt, detail = check_groq(model)
+            print(f"tier={tier} model={model} ok={ok} latency={dt:.2f}s detail={detail!r}")
         except Exception as e:
-            print(f"tier={tier} provider={provider} model={model} ok=False error={type(e).__name__}: {e}")
+            print(f"tier={tier} model={model} ok=False error={type(e).__name__}: {str(e)[:120]}")
 
 
 if __name__ == "__main__":

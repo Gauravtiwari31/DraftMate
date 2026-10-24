@@ -14,11 +14,11 @@ services:
       - key: TAVILY_API_KEY
         sync: false
       - key: MODEL_QUICK
-        value: llama-3.1-8b-instant
+        value: openai/gpt-oss-20b
       - key: MODEL_BALANCED
-        value: llama-3.3-70b-versatile
+        value: openai/gpt-oss-120b
       - key: MODEL_ADVANCED
-        value: gemini-2.5-flash
+        value: openai/gpt-oss-120b
       - key: ALLOWED_ORIGIN
         sync: false
       - key: CACHE_DIR

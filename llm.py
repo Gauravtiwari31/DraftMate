@@ -20,7 +20,7 @@ class Busy(Exception):
     pass
 
 def _call(tier, system, user, max_tokens):
-    if tier == "advanced":
+    if "gemini" in (MODELS[tier] or ""):
         cfg = types.GenerateContentConfig(system_instruction=system, max_output_tokens=max_tokens,
                                           thinking_config=types.ThinkingConfig(thinking_budget=0))
         r = _gem.models.generate_content(model=MODELS[tier], contents=user, config=cfg)
