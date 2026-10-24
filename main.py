@@ -1,5 +1,7 @@
 import os
 import json
+import uuid
+from pathlib import Path
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -8,6 +10,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from llm import llm, Busy, stats
+import docs as docs_mod
+from fastapi import UploadFile, File, Form, HTTPException
 
 app = FastAPI(title="vidhi")
 
@@ -30,6 +34,23 @@ def health():
 @app.get("/stats")
 def get_stats():
     return stats
+
+@app.post("/upload")
+async def upload(file: UploadFile = File(...), role: str = Form("reference")):
+    if role not in ("reference", "source"):
+        role = "reference"
+    data = await file.read()
+    if len(data) > 5 * 1024 * 1024:
+        raise HTTPException(status_code=413, detail="file too large (max 5 MB)")
+    suffix = Path(file.filename).suffix or ".bin"
+    path = docs_mod.UPLOAD_DIR / f"{uuid.uuid4().hex[:12]}{suffix}"
+    path.write_bytes(data)
+    try:
+        doc = docs_mod.ingest(path, role)
+    except docs_mod.NoText:
+        raise HTTPException(status_code=422, detail="no extractable text")
+    return {"doc_id": doc["doc_id"], "tokens_full": doc["tokens_full"]}
+
 
 @app.post("/chat")
 async def chat(payload: dict):
