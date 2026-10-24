@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: vidhi-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: TAVILY_API_KEY
+        sync: false
+      - key: MODEL_QUICK
+        value: llama-3.1-8b-instant
+      - key: MODEL_BALANCED
+        value: llama-3.3-70b-versatile
+      - key: MODEL_ADVANCED
+        value: gemini-2.5-flash
+      - key: ALLOWED_ORIGIN
+        sync: false
+      - key: CACHE_DIR
+        value: demo_cache
