@@ -1,0 +1,10 @@
+[
+  {"raw": "Kesavananda Bharati v. State of Kerala, (1973) 4 SCC 225", "expected_status": "Verified"},
+  {"raw": "Maneka Gandhi v. Union of India, (1978) 1 SCC 248", "expected_status": "Verified"},
+  {"raw": "K.S. Puttaswamy v. Union of India, (2017) 10 SCC 1", "expected_status": "Verified"},
+  {"raw": "Section 27, Indian Contract Act, 1872", "expected_status": "Verified"},
+  {"raw": "Vishaka v. State of Rajasthan, (1997) 6 SCC 241", "expected_status": "Verified"},
+  {"raw": "Balakrishnan Menon v. Corporation of Trivandrum, (1989) 3 SCC 412", "expected_status": "Unverified"},
+  {"raw": "Mehta Industries v. State of Gujarat, (1994) 2 SCC 789", "expected_status": "Unverified"},
+  {"raw": "Kesavananda Bharati v. State of Kerala, (1975) 4 SCC 225", "expected_status": "Unverified"}
+]
