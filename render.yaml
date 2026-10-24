@@ -16,10 +16,9 @@ services:
       - key: MODEL_QUICK
         value: openai/gpt-oss-20b
       - key: MODEL_BALANCED
-        value: openai/gpt-oss-120b
+        value: gemini-3.5-flash
       - key: MODEL_ADVANCED
-        value: openai/gpt-oss-120b
-      - key: ALLOWED_ORIGIN
+        value: gemini-3.5-flash      - key: ALLOWED_ORIGIN
         sync: false
       - key: CACHE_DIR
         value: demo_cache
