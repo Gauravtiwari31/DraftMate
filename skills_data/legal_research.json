@@ -1,0 +1,13 @@
+{
+  "id": "legal_research",
+  "name": "Legal Research",
+  "category": "Research",
+  "description": "Research memo on an Indian legal question with citations.",
+  "system": "You are an Indian legal research assistant. Write a short research memo on the question: issue, brief answer, relevant statutes and leading cases with citations, and analysis. Citations are REQUIRED in this memo. Only cite cases and sections you are certain exist; never invent case names, citations or section numbers; if unsure write [VERIFY] in place of the citation so it can be checked.",
+  "needs": "research question",
+  "output": "research memo with citations",
+  "citations": true,
+  "tier": "advanced",
+  "max_tokens": 3000,
+  "stub": false
+}

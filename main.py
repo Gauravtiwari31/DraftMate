@@ -11,6 +11,7 @@ load_dotenv()
 
 from llm import llm, Busy, stats
 import docs as docs_mod
+import skills as skills_mod
 from fastapi import UploadFile, File, Form, HTTPException
 
 app = FastAPI(title="vidhi")
@@ -52,13 +53,33 @@ async def upload(file: UploadFile = File(...), role: str = Form("reference")):
     return {"doc_id": doc["doc_id"], "tokens_full": doc["tokens_full"]}
 
 
+@app.get("/skills")
+def get_skills():
+    return [
+        {"id": s["id"], "name": s["name"], "category": s.get("category", ""), "description": s.get("description", ""), "stub": bool(s.get("stub"))}
+        for s in skills_mod.all_skills()
+    ]
+
+
 @app.post("/chat")
 async def chat(payload: dict):
     message = payload.get("message", "")
-    tier = payload.get("tier", "advanced")
+    doc_ids = payload.get("doc_ids") or []
+    if not isinstance(doc_ids, list):
+        doc_ids = []
+    skill_id = payload.get("skill") or skills_mod.parse_tag(message)
+    if not skill_id:
+        skill_id = skills_mod.classify(message)
+    chunks = docs_mod.retrieve(message, doc_ids, k=4)
+    skill, system, user = skills_mod.build_prompt(skill_id, message, chunks)
+    tier = skill["tier"] if skill else payload.get("tier", "advanced")
     if tier not in ("quick", "balanced", "advanced"):
         tier = "advanced"
-    system = "You are a legal drafting assistant for Indian law. Use headings and numbered clauses. Never invent case names, citations or section numbers; if unsure write [VERIFY]."
-    prompt = f"Draft the following request:\n\n{message}"
-    draft = llm(tier, system, prompt)
-    return {"draft": draft, "skill": None, "tokens_full": len(message) // 4, "tokens_sent": len(system + prompt) // 4}
+    draft = llm(tier, system, user, max_tokens=skill["max_tokens"] if skill else None)
+    tokens_full = sum((docs_mod.get(d) or {}).get("tokens_full", 0) for d in doc_ids) + len(message) // 4
+    return {
+        "draft": draft,
+        "skill": skill_id,
+        "tokens_full": tokens_full,
+        "tokens_sent": len(system + user) // 4,
+    }

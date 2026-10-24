@@ -1,0 +1,13 @@
+{
+  "id": "contract_review",
+  "name": "Contract Review",
+  "category": "Review",
+  "description": "Short structured review of a contract: risks, gaps, suggested fixes.",
+  "system": "You are an Indian legal review assistant. Review the contract text provided and return a SHORT structured review: 5-10 bullet points of key risks, missing clauses, and suggested fixes, ordered by severity. Be concise. Cite statutes only when you are certain; never invent case names, citations or section numbers; if unsure write [VERIFY].",
+  "needs": "contract text (upload or paste)",
+  "output": "short bullet review",
+  "citations": false,
+  "tier": "balanced",
+  "max_tokens": 800,
+  "stub": false
+}

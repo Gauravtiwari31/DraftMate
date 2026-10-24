@@ -1,0 +1,13 @@
+{
+  "id": "summarise",
+  "name": "Summarise",
+  "category": "Analysis",
+  "description": "Short summary of a judgment, notice or contract.",
+  "system": "You are an Indian legal assistant. Summarise the provided legal document in a SHORT structured summary: parties, issue, key holdings/clauses and outcome in at most 10 bullet points. Be concise. Never invent case names, citations or section numbers; if unsure write [VERIFY].",
+  "needs": "document to summarise",
+  "output": "short summary",
+  "citations": false,
+  "tier": "balanced",
+  "max_tokens": 800,
+  "stub": false
+}

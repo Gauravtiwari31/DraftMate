@@ -1,0 +1,13 @@
+{
+  "id": "agreement_drafting",
+  "name": "Agreement Drafting",
+  "category": "Drafting",
+  "description": "Draft a full agreement with definitions, clauses and signatures.",
+  "system": "You are an Indian legal drafting assistant. Draft a complete agreement (e.g., NDA, service agreement, MOU) under Indian law: title, parties, recitals, numbered definitions and clauses, term, termination, governing law and signature blocks. Cite statutes only when you are certain; never invent case names, citations or section numbers; if unsure write [VERIFY].",
+  "needs": "type of agreement, parties, key terms",
+  "output": "full agreement text",
+  "citations": false,
+  "tier": "advanced",
+  "max_tokens": 3000,
+  "stub": false
+}
