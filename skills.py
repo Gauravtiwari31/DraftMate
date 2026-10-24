@@ -43,7 +43,7 @@ def classify(message):
         + ", ".join(s["id"] for s in real)
     )
     try:
-        out = llm("quick", system, message, max_tokens=20)
+        out = llm("quick", system, message, max_tokens=500)
         out = out.strip().strip('"').strip("'").lower()
         if out in _ensure() and not _ensure()[out].get("stub"):
             return out

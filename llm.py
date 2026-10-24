@@ -29,7 +29,10 @@ def _call(tier, system, user, max_tokens):
         return r.text
     r = _groq.chat.completions.create(model=MODELS[tier], max_tokens=max_tokens,
         messages=[{"role": "system", "content": system}, {"role": "user", "content": user}])
-    return r.choices[0].message.content
+    content = r.choices[0].message.content
+    if not content:
+        raise RuntimeError("empty groq response")
+    return content
 
 def llm(tier, system, user, max_tokens=None):
     mt = min(max_tokens or CAP[tier], CAP[tier])

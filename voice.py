@@ -34,7 +34,7 @@ def parse_action(transcript, draft):
     user = f"Command: {transcript}\n\nCurrent draft (first 500 chars): {draft[:500]}"
     for _ in (0, 1):
         try:
-            out = llm("quick", system, user, max_tokens=300)
+            out = llm("quick", system, user, max_tokens=500)
             return _parse(out)
         except Exception:
             continue
