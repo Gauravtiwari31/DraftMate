@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+markitdown[pdf,docx]
+rank_bm25
+python-docx
+tavily-python
+groq
+google-genai
+python-multipart
+python-dotenv
+requests
