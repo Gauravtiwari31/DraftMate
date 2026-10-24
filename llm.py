@@ -7,7 +7,7 @@ from google.genai import types
 
 load_dotenv()
 
-CACHE = Path(os.getenv("CACHE_DIR", "demo_cache")); CACHE.mkdir(exist_ok=True)
+CACHE = Path(os.getenv("CACHE_DIR", "demo_cache").strip() or "demo_cache"); CACHE.mkdir(exist_ok=True)
 MODELS = {t: os.getenv(f"MODEL_{t.upper()}") for t in ("quick", "balanced", "advanced")}
 CHAIN = {"advanced": ["advanced", "balanced", "quick"], "balanced": ["balanced", "quick"], "quick": ["quick"]}
 CAP = {"quick": 1500, "balanced": 800, "advanced": 3000}

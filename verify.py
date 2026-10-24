@@ -9,7 +9,7 @@ from llm import llm, Busy
 load_dotenv()
 
 ALLOWED_DOMAINS = ["indiankanoon.org", "indiacode.nic.in", "sci.gov.in"]
-CACHE = Path(os.getenv("CACHE_DIR", "demo_cache")); CACHE.mkdir(exist_ok=True)
+CACHE = Path(os.getenv("CACHE_DIR", "demo_cache").strip() or "demo_cache"); CACHE.mkdir(exist_ok=True)
 _tavily = None
 
 

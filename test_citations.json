@@ -6,5 +6,6 @@
   {"raw": "Vishaka v. State of Rajasthan, (1997) 6 SCC 241", "expected_status": "Verified"},
   {"raw": "Balakrishnan Menon v. Corporation of Trivandrum, (1989) 3 SCC 412", "expected_status": "Unverified"},
   {"raw": "Mehta Industries v. State of Gujarat, (1994) 2 SCC 789", "expected_status": "Unverified"},
-  {"raw": "Kesavananda Bharati v. State of Kerala, (1975) 4 SCC 225", "expected_status": "Unverified"}
+  {"raw": "Kesavananda Bharati v. State of Kerala, (1975) 4 SCC 225", "expected_status": "Unverified"},
+  {"raw": "Vishaka Sharma v. State of Rajasthan, (1997) 6 SCC 241", "expected_status": "Partially Verified"}
 ]

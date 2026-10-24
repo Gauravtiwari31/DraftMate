@@ -1,7 +1,7 @@
-"""Generate sample documents used for local testing (T2 acceptance, Phase B)."""
+"""Generate the sample documents in samples/ (all fictional or public)."""
 from pathlib import Path
 
-SAMPLES = Path(__file__).parent / "samples"
+SAMPLES = Path(__file__).parent.parent / "samples"
 SAMPLES.mkdir(exist_ok=True)
 
 
@@ -67,6 +67,44 @@ def make_nda(out: Path):
     doc.save(out)
 
 
+def make_source_letter(out: Path):
+    from docx import Document
+    doc = Document()
+    doc.add_heading("INSTRUCTION LETTER — RENT ARREARS MATTER (FICTIONAL)", 0)
+    doc.add_paragraph(
+        "Dear Counsel,\n\nOur client, Mr. R. Deshmukh, owns a flat at Kothrud, Pune, let out to "
+        "Mr. S. Kulkarni since 1 April 2023 at a monthly rent of Rs 15,000 under a registered leave "
+        "and licence agreement. No rent has been paid for the months of May through October 2025, "
+        "totalling Rs 90,000. Two oral demands and one WhatsApp reminder have been ignored. "
+        "The agreement is governed by Maharashtra law; the security deposit of Rs 45,000 is with us. "
+        "Please draft a legal notice demanding payment within 15 days, failing which we will pursue "
+        "remedies under the Maharashtra Rent Control Act, 1999 and, if required, civil recovery.\n\n"
+        "Yours faithfully,\nAlpha Chambers (fictional, for demo use only)"
+    )
+    doc.save(out)
+
+
+def make_demo_draft(out: Path):
+    from docx import Document
+    doc = Document()
+    doc.add_heading("DRAFT LEGAL NOTICE (SAMPLE WITH CITATIONS)", 0)
+    doc.add_paragraph(
+        "1. You are hereby called upon to pay the arrears of rent within fifteen (15) days. "
+        "The rights of my client are affected by the law laid down in Kesavananda Bharati v. State "
+        "of Kerala, (1973) 4 SCC 225, and the principle of natural justice recognised in Maneka "
+        "Gandhi v. Union of India, (1978) 1 SCC 248."
+    )
+    doc.add_paragraph(
+        "2. Reliance is also placed on Balakrishnan Menon v. Corporation of Trivandrum, (1989) 3 "
+        "SCC 412, which supports the claim for mesne profits."
+    )
+    doc.add_paragraph(
+        "Note for testers: citation 1 and 2 are real and should verify green; citation 3 (clause 2) "
+        "is planted and does not exist — it should show red/Unverified."
+    )
+    doc.save(out)
+
+
 def make_big_doc(out: Path):
     from docx import Document
     doc = Document()
@@ -90,8 +128,10 @@ if __name__ == "__main__":
         "2. Confidential Information covers all non-public technical data.",
         "3. The Receiving Party shall not disclose any Confidential Information.",
         "4. Term: two years from the Effective Date.",
-        "5. Governing law: India; jurisdiction: courts at Delhi.",
-    ], SAMPLES / "sample.pdf")
-    make_pdf([" "], SAMPLES / "scanned.pdf")
+        "5. Governing law: India; jurisdiction: courts at Mumbai.",
+    ], SAMPLES / "reference_nda.pdf")
+    make_source_letter(SAMPLES / "source_letter.docx")
+    make_demo_draft(SAMPLES / "demo_draft.docx")
     make_big_doc(SAMPLES / "big_50page.docx")
+    make_pdf([" "], SAMPLES / "scanned.pdf")
     print("samples written to", SAMPLES)

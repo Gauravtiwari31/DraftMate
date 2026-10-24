@@ -65,9 +65,9 @@ export default function Sidebar({ skills, docs, tier, setTier, onUpload, onPickS
       <div className="panel">
         <h3>Model</h3>
         <select value={tier} onChange={(e) => setTier(e.target.value)}>
-          <option value="quick">Quick (fast, short)</option>
-          <option value="balanced">Balanced (short outputs)</option>
-          <option value="advanced">Advanced (drafting default)</option>
+          <option value="quick" title="Fast, short outputs (Groq 20B)">Quick</option>
+          <option value="balanced" title="Balanced, short outputs only (Groq 120B)">Balanced</option>
+          <option value="advanced" title="Full drafts — drafting default (Gemini)">Advanced (default)</option>
         </select>
       </div>
     </aside>

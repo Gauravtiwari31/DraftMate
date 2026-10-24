@@ -22,7 +22,7 @@ def main():
     draft = r.json()["draft"]
     r = requests.post(BASE + "/edit", json={"instruction": "make the demand paragraph shorter and more formal", "draft": draft}, timeout=300)
     print("edit:", r.status_code)
-    r = requests.post(BASE + "/verify", json={"text": draft + "\nReference: Kesavananda Bharati v. State of Kerala, (1973) 4 SCC 225."}, timeout=300)
+    r = requests.post(BASE + "/verify", json={"text": draft + "\nReference: Kesavananda Bharati v. State of Kerala, (1973) 4 SCC 225.\nAlso see Vishaka Sharma v. State of Rajasthan, (1997) 6 SCC 241."}, timeout=300)
     print("verify:", r.status_code, r.json())
     r = requests.post(BASE + "/export", json={"draft": draft, "format": "docx"}, timeout=120)
     print("export:", r.status_code, len(r.content), "bytes")
