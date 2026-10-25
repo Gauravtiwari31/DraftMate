@@ -1,7 +1,7 @@
 {
-    "category":  "Notices",
-    "name":  "GST Notice Reply",
-    "id":  "gst_reply",
-    "description":  "Coming soon.",
-    "stub":  true
+  "category": "Compliance & Advisory",
+  "name": "GST Notice Reply",
+  "id": "gst_reply",
+  "description": "Coming soon.",
+  "stub": true
 }

@@ -1,4 +1,4 @@
-# Vidhi — DraftMate Legal Drafting Studio
+# DraftMate — Your AI Assistant in Law
 
 AI legal drafting studio for Indian law: upload a reference document, draft with skills, verify citations against allow-listed legal sources, edit by voice or typed command, export DOCX. Human review required — it flags what it can't confirm instead of inventing.
 
@@ -18,7 +18,14 @@ pip install -r requirements.txt
 python -m uvicorn main:app --port 8000
 cd frontend && npm install && npm run dev
 ```
-Open http://localhost:5173 (backend at http://localhost:8000). Local is the primary demo; deployment status in PROGRESS.md.
+Open http://localhost:5173 (backend at http://localhost:8000). Local is the primary demo. To deploy, follow DEPLOY.md.
+
+## Tests
+```
+python api_test.py                      # offline regression test, no keys used (needs: pip install httpx pyyaml)
+python smoke.py http://localhost:8000   # live: health, skills, chat, verify
+python verify_test.py                   # live: citation verification table
+```
 
 ## Tester checklist (browser)
 1. Upload `samples/reference_nda.docx` with the **reference** toggle → style profile + token meter appear.

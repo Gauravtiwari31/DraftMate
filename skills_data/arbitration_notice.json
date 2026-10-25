@@ -1,7 +1,7 @@
 {
-    "category":  "Notices",
-    "name":  "Arbitration Notice",
-    "id":  "arbitration_notice",
-    "description":  "Coming soon.",
-    "stub":  true
+  "category": "Drafting & Writing",
+  "name": "Arbitration Notice",
+  "id": "arbitration_notice",
+  "description": "Coming soon.",
+  "stub": true
 }

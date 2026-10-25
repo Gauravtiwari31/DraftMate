@@ -1,7 +1,7 @@
 {
-    "category":  "Opinions",
-    "name":  "Legal Opinion",
-    "id":  "legal_opinion",
-    "description":  "Coming soon.",
-    "stub":  true
+  "category": "Compliance & Advisory",
+  "name": "Legal Opinion",
+  "id": "legal_opinion",
+  "description": "Coming soon.",
+  "stub": true
 }

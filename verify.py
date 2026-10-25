@@ -3,6 +3,7 @@ import json
 import os
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+from urllib.parse import urlparse
 from dotenv import load_dotenv
 from llm import llm, Busy
 
@@ -75,8 +76,13 @@ def _match_citation(citation, results):
     return match, index, str(m.get("reason", ""))
 
 
+def _allowed(url):
+    host = (urlparse(url).hostname or "").lower()
+    return any(host == d or host.endswith("." + d) for d in ALLOWED_DOMAINS)
+
+
 def status(match, url):
-    if match == "full" and url and any(d in url for d in ALLOWED_DOMAINS):
+    if match == "full" and url and _allowed(url):
         return "Verified"
     if match == "partial" and url:
         return "Partially Verified"

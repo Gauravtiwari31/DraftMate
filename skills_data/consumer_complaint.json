@@ -1,7 +1,7 @@
 {
-    "category":  "Complaints",
-    "name":  "Consumer Complaint",
-    "id":  "consumer_complaint",
-    "description":  "Coming soon.",
-    "stub":  true
+  "category": "Drafting & Writing",
+  "name": "Consumer Complaint",
+  "id": "consumer_complaint",
+  "description": "Coming soon.",
+  "stub": true
 }

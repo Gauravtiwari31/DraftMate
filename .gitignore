@@ -6,4 +6,11 @@ frontend/dist/
 .venv/
 uploads/
 *.log
-*.log
+
+# local-only: brief, plans, notes and presentation
+HACKATHON PROBLEM STATEMENT.pdf
+*.pptx
+DraftMate_KodeKurrent_S2.pdf
+DraftMate_BUILD_PROMPT.md
+PROGRESS.md
+details.md

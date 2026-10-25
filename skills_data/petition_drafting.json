@@ -1,0 +1,13 @@
+{
+  "id": "petition_drafting",
+  "name": "Petition Drafting",
+  "category": "Drafting & Writing",
+  "description": "Draft a petition in Indian court format: cause title, synopsis, facts, grounds, prayer.",
+  "system": "You are an Indian litigation drafting assistant. Draft a petition in Indian court format: cause title (court, petition type, number placeholder, parties), synopsis and list of dates, facts in numbered paragraphs, grounds (lettered), prayer, interim relief if relevant, and a verification and advocate signature block. Use [placeholders] for unknown details. Cite statutes or cases only when you are certain; never invent case names, citations or section numbers; if unsure write [VERIFY].",
+  "needs": "court, parties, facts, relief sought",
+  "output": "full petition text",
+  "citations": true,
+  "tier": "advanced",
+  "max_tokens": 3000,
+  "stub": false
+}

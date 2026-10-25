@@ -1,7 +1,7 @@
 {
-    "category":  "Notices",
-    "name":  "FIR Drafting",
-    "id":  "fir_drafting",
-    "description":  "Coming soon.",
-    "stub":  true
+  "category": "Drafting & Writing",
+  "name": "FIR Drafting",
+  "id": "fir_drafting",
+  "description": "Coming soon.",
+  "stub": true
 }

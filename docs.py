@@ -63,15 +63,18 @@ def get(doc_id: str):
     return DOCS.get(doc_id)
 
 
-def retrieve(query: str, doc_ids, k=4):
+WHOLE_DOC_TOKENS = 6000  # whole-document skills send everything up to this size
+
+
+def retrieve(query: str, doc_ids, k=4, whole=False):
+    docs = [DOCS[d] for d in doc_ids or [] if d in DOCS]
+    if whole and sum(d["tokens_full"] for d in docs) <= WHOLE_DOC_TOKENS:
+        return [c for d in docs for c in d["chunks"]]
     out = []
-    for doc_id in doc_ids or []:
-        doc = DOCS.get(doc_id)
-        if not doc:
-            continue
+    for doc in docs:
         scores = doc["bm25"].get_scores(_tokenize(query))
         ranked = sorted(range(len(doc["chunks"])), key=lambda i: -scores[i])[:k]
-        out.extend(doc["chunks"][i] for i in ranked)
+        out.extend(doc["chunks"][i] for i in sorted(ranked))  # keep document order
     return out[:k]
 
 

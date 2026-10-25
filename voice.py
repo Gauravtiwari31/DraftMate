@@ -1,5 +1,6 @@
 import json
 from llm import llm
+from skills import real_ids
 
 ACTIONS = ("dictate", "edit", "use_skill", "verify", "export", "overwrite", "delete", "undo")
 
@@ -25,10 +26,11 @@ def parse_action(transcript, draft):
         '"skill":string|null,"text":string|null,"needs_confirm":bool,"message":string|null}. '
         "Rules: raw dictation to add to the draft -> dictate (text=the dictated words). "
         "A change request for the existing draft -> edit (text=the instruction). "
-        "A request to invoke a drafting skill -> use_skill (skill=one of legal_notice, agreement_drafting, "
-        "contract_review, redlining, summarise, legal_research). "
+        "A request to invoke a drafting skill -> use_skill (skill=one of " + ", ".join(real_ids()) + "). "
         "Check citations -> verify. Export as DOCX -> export. "
-        "Replace the entire draft with new content -> overwrite. Delete everything -> delete. "
+        "Replace the entire draft with words the user dictates -> overwrite (text=those words). "
+        "Replace, redo or start over with a new document of some type (e.g. 'replace the draft with an NDA', "
+        "'start over with a legal notice') -> use_skill with the matching skill. Delete everything -> delete. "
         "Undo the last change -> undo. Unrecognised -> none (message=short explanation)."
     )
     user = f"Command: {transcript}\n\nCurrent draft (first 500 chars): {draft[:500]}"

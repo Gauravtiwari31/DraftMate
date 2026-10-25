@@ -13,7 +13,7 @@ def _ensure():
         _cache = {}
         for f in sorted(DATA.glob("*.json")):
             try:
-                s = json.loads(f.read_text())
+                s = json.loads(f.read_text(encoding="utf-8"))
                 _cache[s["id"]] = s
             except Exception:
                 pass
@@ -24,15 +24,25 @@ def all_skills():
     return list(_ensure().values())
 
 
+def real_ids():
+    return [s["id"] for s in _ensure().values() if not s.get("stub")]
+
+
 def get(skill_id):
     return _ensure().get(skill_id)
 
 
 def parse_tag(message):
-    m = re.search(r"@([\w-]+)", message)
-    if m and m.group(1) in _ensure():
-        return m.group(1)
+    """First @tag naming a known skill (stub or not); callers reject stubs."""
+    for tag in re.findall(r"@([\w-]+)", message):
+        if tag in _ensure():
+            return tag
     return None
+
+
+def is_stub(skill_id):
+    s = get(skill_id)
+    return bool(s and s.get("stub"))
 
 
 def classify(message):

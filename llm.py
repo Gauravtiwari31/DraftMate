@@ -19,6 +19,25 @@ _lock = threading.Lock()
 class Busy(Exception):
     pass
 
+
+def model_label(model):
+    """Display name for a model id from .env, e.g. 'openai/gpt-oss-120b' -> 'GPT-OSS 120B'."""
+    if not model:
+        return "Not configured"
+    words = model.split("/")[-1].replace("-", " ").split()
+    out = []
+    for w in words:
+        if w.lower() in ("gpt", "oss") or (w[:-1].isdigit() and w[-1].lower() == "b"):
+            out.append(w.upper())
+        else:
+            out.append(w.capitalize())
+    label = " ".join(out).replace("GPT OSS", "GPT-OSS")
+    return label
+
+
+def provider(model):
+    return "Google Gemini" if "gemini" in (model or "") else "Groq"
+
 def _call(tier, system, user, max_tokens):
     if "gemini" in (MODELS[tier] or ""):
         cfg = types.GenerateContentConfig(system_instruction=system, max_output_tokens=max_tokens,
@@ -34,17 +53,22 @@ def _call(tier, system, user, max_tokens):
         raise RuntimeError("empty groq response")
     return content
 
-def llm(tier, system, user, max_tokens=None):
-    mt = min(max_tokens or CAP[tier], CAP[tier])
+def llm(tier, system, user, max_tokens=None, cap=True):
+    # cap=False lets callers that must return a whole document (e.g. /edit) exceed the tier cap
+    mt = min(max_tokens or CAP[tier], CAP[tier]) if cap else (max_tokens or CAP[tier])
     key = hashlib.sha256(json.dumps([tier, system, user, mt]).encode()).hexdigest()
     f = CACHE / f"{key}.json"
     if f.exists():
-        with _lock: stats["cache_hits"] += 1
-        return json.loads(f.read_text())["text"]
+        try:
+            text = json.loads(f.read_text())["text"]
+            with _lock: stats["cache_hits"] += 1
+            return text
+        except Exception:
+            pass  # corrupt cache entry: fall through and refetch
     for t in CHAIN[tier]:
         for attempt in (0, 1):
             try:
-                text = _call(t, system, user, min(mt, CAP[t]))
+                text = _call(t, system, user, min(mt, CAP[t]) if cap else mt)
                 with _lock: stats["calls"][t] += 1
                 f.write_text(json.dumps({"text": text}))
                 return text

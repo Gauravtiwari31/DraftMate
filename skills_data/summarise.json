@@ -1,13 +1,14 @@
 {
   "id": "summarise",
   "name": "Summarise",
-  "category": "Analysis",
+  "category": "Document Review & Analysis",
   "description": "Short summary of a judgment, notice or contract.",
-  "system": "You are an Indian legal assistant. Summarise the provided legal document in a SHORT structured summary: parties, issue, key holdings/clauses and outcome in at most 10 bullet points. Be concise. Never invent case names, citations or section numbers; if unsure write [VERIFY].",
+  "system": "You are an Indian legal assistant. Summarise the provided legal document as a structured summary: first the parties, purpose/issue and outcome or effect, then ONE bullet for EVERY numbered clause, section or heading in the document, in the order they appear, so no clause is skipped (e.g. obligations, term, termination, governing law). Keep each bullet to one or two lines. Do not add a closing note claiming the summary is complete. Never invent case names, citations or section numbers; if unsure write [VERIFY].",
   "needs": "document to summarise",
   "output": "short summary",
   "citations": false,
   "tier": "balanced",
-  "max_tokens": 800,
-  "stub": false
+  "max_tokens": 1200,
+  "stub": false,
+  "whole_doc": true
 }

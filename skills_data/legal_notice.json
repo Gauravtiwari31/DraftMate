@@ -1,7 +1,7 @@
 {
   "id": "legal_notice",
   "name": "Legal Notice",
-  "category": "Notices",
+  "category": "Drafting & Writing",
   "description": "Draft a formal legal notice (demand, breach, recovery) under Indian law.",
   "system": "You are an Indian legal drafting assistant. Draft a formal legal notice in Indian legal style: a clear heading, addressee block, numbered factual paragraphs, a demand or relief section with reasonable deadlines, and a closing reservation of rights. Cite statutes only when you are certain; never invent case names, citations or section numbers; if unsure write [VERIFY].",
   "needs": "facts of the dispute, parties, amounts/dates",
